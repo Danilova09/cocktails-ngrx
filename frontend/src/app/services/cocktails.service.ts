@@ -16,8 +16,6 @@ export class CocktailsService {
     Object.keys(cocktailData).forEach(key => {
       if (cocktailData[key] !== null) formData.append(key, cocktailData[key]);
     })
-    this.http.post<Cocktail>(env.apiUrl + '/cocktails', formData).pipe(tap(response => {
-      console.log(response);
-    })).subscribe();
+    return this.http.post<Cocktail>(env.apiUrl + '/cocktails', formData);
   }
 }

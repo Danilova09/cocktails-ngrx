@@ -50,7 +50,7 @@ router.post('/', auth, permit('user', 'admin'), upload.single('image'), async (r
         const cocktail = new Cocktail(cocktailData);
         cocktail.save();
 
-        res.send(cocktail);
+        return res.send(cocktail);
     } catch (e) {
         next(e);
     }

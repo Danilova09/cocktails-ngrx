@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { CocktailsService } from '../../services/cocktails.service';
+import { createCocktailFailure, createCocktailRequest } from '../../store/cocktails.actions';
 
 @Component({
   selector: 'app-cocktail-form',
@@ -72,6 +73,6 @@ export class CocktailFormComponent implements OnInit {
   onSubmit() {
     const ingredients =  JSON.stringify(this.cocktailForm.controls['ingredients'].value);
     const cocktailData = {...this.cocktailForm.value, ingredients, user: this.userId};
-    this.cocktailsService.createCocktail(cocktailData);
+    this.store.dispatch(createCocktailRequest({cocktailData}));
   }
 }
