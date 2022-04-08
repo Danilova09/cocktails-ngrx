@@ -9,13 +9,22 @@ import { Cocktail, CocktailData } from '../models/cocktail.model';
 })
 export class CocktailsService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
+
+  getCocktails() {
+    return this.http.get<Cocktail[]>(env.apiUrl + '/cocktails');
+  }
 
   createCocktail(cocktailData: CocktailData) {
     const formData = new FormData();
     Object.keys(cocktailData).forEach(key => {
       if (cocktailData[key] !== null) formData.append(key, cocktailData[key]);
-    })
+    });
     return this.http.post<Cocktail>(env.apiUrl + '/cocktails', formData);
+  }
+
+  removeCocktail(cocktailId: string) {
+    return this.http.delete(env.apiUrl + '/cocktails/' + cocktailId);
   }
 }

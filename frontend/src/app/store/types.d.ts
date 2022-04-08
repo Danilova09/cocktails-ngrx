@@ -11,8 +11,12 @@ export type UsersState = {
 
 export type CocktailsState = {
   cocktails: Cocktail[],
+  fetchLoading: boolean,
+  fetchError: null | string,
   createLoading: boolean,
   createError: null | string,
+  deleteLoading: boolean,
+  deleteError: null | string,
 }
 
 export type AppState = {

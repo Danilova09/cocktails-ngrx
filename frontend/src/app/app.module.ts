@@ -29,6 +29,9 @@ import { CenteredCardComponent } from './ui/centered-card/centered-card.componen
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CocktailFormComponent } from './pages/cocktail-form/cocktail-form.component';
+import { CocktailsPipe } from './pipes/artists.pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CocktailsDetailsComponent } from './pages/cocktails-details/cocktails-details.component';
 
 
 const socialConfig: SocialAuthServiceConfig = {
@@ -55,6 +58,8 @@ const socialConfig: SocialAuthServiceConfig = {
     FileInputComponent,
     CenteredCardComponent,
     CocktailFormComponent,
+    CocktailsPipe,
+    CocktailsDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +81,7 @@ const socialConfig: SocialAuthServiceConfig = {
     AppStoreModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

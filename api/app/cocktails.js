@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const path = require("path");
 const multer = require("multer");
 const config = require('../config');
@@ -6,6 +7,7 @@ const {nanoid} = require("nanoid");
 const Cocktail = require('../models/Cocktail');
 const auth = require("../middleware/auth");
 const permit = require("../middleware/permit");
+const {mongo} = require("../config");
 const router = express.Router();
 
 
@@ -51,6 +53,25 @@ router.post('/', auth, permit('user', 'admin'), upload.single('image'), async (r
         cocktail.save();
 
         return res.send(cocktail);
+    } catch (e) {
+        next(e);
+    }
+});
+
+
+router.delete('/:id', auth, permit('admin'), async (req, res, next) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).send({error: 'invalid id'});
+        }
+
+        const cocktail = await Cocktail.findById(req.params.id);
+
+        if (!cocktail) {
+            return res.status(400).send({error: `Cocktails with id = ${req.params.id} wasnt found!`})
+        }
+        cocktail.deleteOne();
+        return res.send({message: 'Successfully deleted!'});
     } catch (e) {
         next(e);
     }

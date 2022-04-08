@@ -15,6 +15,7 @@ export interface Cocktail {
   user: string,
   name: string,
   recipe: string,
+  isPublished: boolean,
   ingredients: [{
     ingredientName: string,
     ingredientAmount: string,
