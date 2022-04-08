@@ -5,7 +5,7 @@ import { Cocktail } from '../models/cocktail.model';
   name: 'cocktails'
 })
 export class CocktailsPipe implements PipeTransform {
-  transform(cocktails: Cocktail[] | null):  Cocktail[] | null {
+  transform(cocktails: Cocktail[] | null): Cocktail[] | null {
     if (!cocktails) {
       return cocktails;
     }

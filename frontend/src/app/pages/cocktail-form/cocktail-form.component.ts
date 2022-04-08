@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
-import { CocktailsService } from '../../services/cocktails.service';
-import { createCocktailFailure, createCocktailRequest } from '../../store/cocktails.actions';
+import { createCocktailRequest } from '../../store/cocktails.actions';
 
 @Component({
   selector: 'app-cocktail-form',
@@ -16,11 +15,10 @@ export class CocktailFormComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private cocktailsService: CocktailsService,
-    ) {
+  ) {
     store.select(state => state.users.user).subscribe(user => {
       this.userId = user?._id;
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -71,8 +69,10 @@ export class CocktailFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const ingredients =  JSON.stringify(this.cocktailForm.controls['ingredients'].value);
-    const cocktailData = {...this.cocktailForm.value, ingredients, user: this.userId};
-    this.store.dispatch(createCocktailRequest({cocktailData}));
+    if (this.cocktailForm.valid) {
+      const ingredients = JSON.stringify(this.cocktailForm.controls['ingredients'].value);
+      const cocktailData = {...this.cocktailForm.value, ingredients, user: this.userId};
+      this.store.dispatch(createCocktailRequest({cocktailData}));
+    }
   }
 }

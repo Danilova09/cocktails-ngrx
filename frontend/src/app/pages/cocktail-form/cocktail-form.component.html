@@ -19,7 +19,7 @@
       <div style="margin-top: 10px;">
         <button mat-raised-button color="primary" type="button" (click)="addIngredient()">add Ingredient</button>
         <div class="block" style="margin-top: 20px;" formArrayName="ingredients">
-          <div class="duplicating-skill-form" *ngFor="let skillForm of getIngredientsControls(); let i = index">
+          <div class="duplicating-ingredient-form" *ngFor="let ingredientForm of getIngredientsControls(); let i = index">
             <div style="display: flex; justify-content: space-between; align-items: baseline" [formGroupName]="i">
               <mat-form-field style="width: 40%;" appearance="outline">
                 <mat-label>Ingredient name</mat-label>
@@ -29,17 +29,12 @@
                   Ingredient name is required!
                 </mat-error>
               </mat-form-field>
-              <mat-form-field style="width: 40%; margin-left: 10px;" appearance="outline">
-                <mat-label>Ingredients</mat-label>
-                <select matNativeControl name="amount" formControlName="ingredientAmount" required>
-                  <option selected value="">Choose amount</option>
-                  <option value="ml">ml</option>
-                  <option value="pc">pc</option>
-                  <option value="shot">shot</option>
-                  <option value="pinch">pinch</option>
-                </select>
+              <mat-form-field style="width: 40%; margin-left: 20px;" appearance="outline">
+                <mat-label>Amount</mat-label>
+                <input matInput name="ingredientAmount" id="ingredientAmount"
+                       formControlName="ingredientAmount">
                 <mat-error *ngIf="ingredientFieldHasError('ingredientAmount', 'required', i)">
-                  Ingredient amount is required!
+                  Amount is required!
                 </mat-error>
               </mat-form-field>
               <button mat-raised-button type="button" style="width: 20%; margin-left: 10px;"

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,9 +28,10 @@ import { CenteredCardComponent } from './ui/centered-card/centered-card.componen
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CocktailFormComponent } from './pages/cocktail-form/cocktail-form.component';
-import { CocktailsPipe } from './pipes/artists.pipe';
+import { CocktailsPipe } from './pipes/cocktails.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CocktailsDetailsComponent } from './pages/cocktails-details/cocktails-details.component';
+import { UsersCocktailsComponent } from './pages/users-cocktails/users-cocktails.component';
 
 
 const socialConfig: SocialAuthServiceConfig = {
@@ -60,6 +60,7 @@ const socialConfig: SocialAuthServiceConfig = {
     CocktailFormComponent,
     CocktailsPipe,
     CocktailsDetailsComponent,
+    UsersCocktailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,5 +90,4 @@ const socialConfig: SocialAuthServiceConfig = {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

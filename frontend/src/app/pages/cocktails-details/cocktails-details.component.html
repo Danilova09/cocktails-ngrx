@@ -1,1 +1,19 @@
-<p>cocktails-details works!</p>
+<div class="main-block">
+  <div style="display: flex">
+    <img style="width: 40%" *ngIf="(cocktail | async)?.image"
+         [src]="env.cocktailsUploadPath + (cocktail | async)?.image" [alt]="(cocktail | async)?.name">
+    <div style="width: 60%; margin-left: 40px;">
+      <h1><strong>{{(cocktail | async)?.name }}</strong></h1>
+      <p><strong>Ingredients:</strong></p>
+      <ul>
+        <li *ngFor="let ingredient of (cocktail | async)?.ingredients" role="listitem">
+          {{ ingredient.ingredientName }}- {{ ingredient.ingredientAmount}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div style="padding: 20px 0 0 40px;">
+    <h2><strong>Recipe</strong></h2>
+    <p>{{(cocktail | async)?.recipe }}</p>
+  </div>
+</div>

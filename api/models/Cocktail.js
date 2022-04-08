@@ -1,23 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// const IngredientSchema = new mongoose.Schema({
-//     cocktail: {
-//         required: true,
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: 'Cocktail',
-//     },
-//     title: {
-//         required: true,
-//         type: String,
-//     },
-//     amount: {
-//         required: true,
-//         type: String,
-//         enum: ['ml', 'pc', 'shot', 'pinch'],
-//     }
-// });
-
 const CocktailSchema = new Schema({
     user: {
         required: true,
@@ -43,7 +26,6 @@ const CocktailSchema = new Schema({
             ingredientAmount: String,
         }],
         required: true,
-        default: undefined,
     },
     image: {
         required: true,

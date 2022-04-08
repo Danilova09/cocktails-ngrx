@@ -7,7 +7,6 @@ const {nanoid} = require("nanoid");
 const Cocktail = require('../models/Cocktail');
 const auth = require("../middleware/auth");
 const permit = require("../middleware/permit");
-const {mongo} = require("../config");
 const router = express.Router();
 
 
@@ -24,8 +23,24 @@ const upload = multer({storage});
 
 router.get('/', async (req, res, next) => {
     try {
+        if (req.query.user) {
+            const cocktails = await Cocktail.find({user: req.query.user});
+            return res.send(cocktails);
+        }
         const cocktails = await Cocktail.find();
-        res.send(cocktails);
+        return res.send(cocktails);
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.get('/:id', async (req, res, next) => {
+    try {
+        const cocktail = await Cocktail.findById(req.params.id);
+        if (!cocktail) {
+            return res.status(404).send({error: 'Cocktail not found'});
+        }
+        return res.send(cocktail);
     } catch (e) {
         next(e);
     }
@@ -58,6 +73,17 @@ router.post('/', auth, permit('user', 'admin'), upload.single('image'), async (r
     }
 });
 
+router.post('/:id/publish', auth, permit('admin'), async (req, res, next) => {
+    try {
+        const filter = {_id: req.params.id};
+        const update = {isPublished: true};
+        const updatedCocktail = await Cocktail.findOneAndUpdate(filter, update);
+        updatedCocktail.save();
+        res.send(updatedCocktail);
+    } catch (e) {
+        next(e);
+    }
+});
 
 router.delete('/:id', auth, permit('admin'), async (req, res, next) => {
     try {
@@ -68,7 +94,7 @@ router.delete('/:id', auth, permit('admin'), async (req, res, next) => {
         const cocktail = await Cocktail.findById(req.params.id);
 
         if (!cocktail) {
-            return res.status(400).send({error: `Cocktails with id = ${req.params.id} wasnt found!`})
+            return res.status(400).send({error: `Cocktails with id = ${req.params.id} wasn't found!`})
         }
         cocktail.deleteOne();
         return res.send({message: 'Successfully deleted!'});

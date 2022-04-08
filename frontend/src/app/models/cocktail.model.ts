@@ -1,12 +1,11 @@
+import { Ingredient } from './ingredient.model';
+
 export interface CocktailData {
   [key: string]: any,
   user: string,
   name: string,
   recipe: string,
-  ingredients: [{
-    ingredientName: string,
-    ingredientAmount: string,
-  }],
+  ingredients: Ingredient[],
   image: File,
 }
 
@@ -16,9 +15,6 @@ export interface Cocktail {
   name: string,
   recipe: string,
   isPublished: boolean,
-  ingredients: [{
-    ingredientName: string,
-    ingredientAmount: string,
-  }],
+  ingredients: Ingredient[],
   image: string,
 }

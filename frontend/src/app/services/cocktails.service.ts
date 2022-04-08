@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment as env } from '../../environments/environment';
-import { tap } from 'rxjs';
 import { Cocktail, CocktailData } from '../models/cocktail.model';
 
 @Injectable({
@@ -9,8 +8,7 @@ import { Cocktail, CocktailData } from '../models/cocktail.model';
 })
 export class CocktailsService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getCocktails() {
     return this.http.get<Cocktail[]>(env.apiUrl + '/cocktails');
@@ -26,5 +24,19 @@ export class CocktailsService {
 
   removeCocktail(cocktailId: string) {
     return this.http.delete(env.apiUrl + '/cocktails/' + cocktailId);
+  }
+
+  publishCocktail(cocktailId: string) {
+    return this.http.post(`${env.apiUrl}/cocktails/${cocktailId}/publish`, cocktailId);
+  }
+
+  getCocktailDetails(cocktailId: string) {
+    return this.http.get<Cocktail>(`${env.apiUrl}/cocktails/${cocktailId}`);
+  }
+
+  getUsersCocktails(userId: string) {
+    let params = new HttpParams();
+    params = params.append('user', userId);
+    return this.http.get<Cocktail[]>(`${env.apiUrl}/cocktails`, {params: params});
   }
 }

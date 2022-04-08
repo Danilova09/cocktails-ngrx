@@ -10,6 +10,8 @@ export type UsersState = {
 }
 
 export type CocktailsState = {
+  usersCocktails: null | Cocktail[],
+  cocktailDetails: null | Cocktail,
   cocktails: Cocktail[],
   fetchLoading: boolean,
   fetchError: null | string,
@@ -17,6 +19,8 @@ export type CocktailsState = {
   createError: null | string,
   deleteLoading: boolean,
   deleteError: null | string,
+  publishLoading: boolean,
+  publishError: null | string,
 }
 
 export type AppState = {
