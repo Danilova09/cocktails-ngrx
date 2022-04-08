@@ -1,0 +1,60 @@
+<div class="main-block">
+  <mat-card class="form-block">
+    <form fxLayout="column" fxLayoutAlign="center" [formGroup]="cocktailForm" (ngSubmit)="onSubmit()">
+      <h3>Create cocktail</h3>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" formControlName="name" name="name" matInput>
+        <mat-error *ngIf="fieldHasErrors('name', 'required')">
+          Name is required!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Recipe</mat-label>
+        <textarea formControlName="recipe" type="text" name="recipe" matInput required></textarea>
+        <mat-error *ngIf="fieldHasErrors('recipe', 'required')">
+          Recipe is required!
+        </mat-error>
+      </mat-form-field>
+      <div style="margin-top: 10px;">
+        <button mat-raised-button color="primary" type="button" (click)="addIngredient()">add Ingredient</button>
+        <div class="block" style="margin-top: 20px;" formArrayName="ingredients">
+          <div class="duplicating-skill-form" *ngFor="let skillForm of getIngredientsControls(); let i = index">
+            <div style="display: flex; justify-content: space-between; align-items: baseline" [formGroupName]="i">
+              <mat-form-field style="width: 40%;" appearance="outline">
+                <mat-label>Ingredient name</mat-label>
+                <input matInput name="ingredientName" id="ingredientName"
+                       formControlName="ingredientName">
+                <mat-error *ngIf="ingredientFieldHasError('ingredientName', 'required', i)">
+                  Ingredient name is required!
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field style="width: 40%; margin-left: 10px;" appearance="outline">
+                <mat-label>Ingredients</mat-label>
+                <select matNativeControl name="amount" formControlName="ingredientAmount" required>
+                  <option selected value="">Choose amount</option>
+                  <option value="ml">ml</option>
+                  <option value="pc">pc</option>
+                  <option value="shot">shot</option>
+                  <option value="pinch">pinch</option>
+                </select>
+                <mat-error *ngIf="ingredientFieldHasError('ingredientAmount', 'required', i)">
+                  Ingredient amount is required!
+                </mat-error>
+              </mat-form-field>
+              <button mat-raised-button type="button" style="width: 20%; margin-left: 10px;"
+                      (click)="deleteIngredient(i)">
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <app-file-input formControlName="image"></app-file-input>
+      </mat-form-field>
+      <button mat-raised-button color="primary">CREATE</button>
+    </form>
+  </mat-card>
+</div>

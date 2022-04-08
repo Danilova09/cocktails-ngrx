@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 const config = require('./config');
 const users = require('./app/users');
+const cocktails = require('./app/cocktails');
+const ingredients = require('./app/ingredients');
 const port = 8000;
 
 const whitelist = ['http://localhost:4200', 'https://localhost:4200'];
@@ -22,6 +24,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static('public'));
 app.use('/users', (users));
+app.use('/cocktails', (cocktails));
+app.use('/ingredients', (ingredients));
 
 
 const run = async () => {

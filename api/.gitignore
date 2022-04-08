@@ -2,3 +2,4 @@
 .DS_Store/
 node_modules/
 public/uploads/images/avatars/*
+public/uploads/images/cocktails/*

@@ -4,6 +4,7 @@ const rootPath = __dirname;
 module.exports = {
     rootPath,
     avatarsUploadPath: path.join(rootPath, 'public/uploads/images/avatars'),
+    cocktailsUploadPath: path.join(rootPath, 'public/uploads/images/cocktails'),
     mongo: {
         db: 'mongodb://localhost/cocktails',
         options: {useNewUrlParser: true},

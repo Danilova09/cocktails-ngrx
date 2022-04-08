@@ -28,6 +28,7 @@ import { FileInputComponent } from './ui/file-input/file-input.component';
 import { CenteredCardComponent } from './ui/centered-card/centered-card.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CocktailFormComponent } from './pages/cocktail-form/cocktail-form.component';
 
 
 const socialConfig: SocialAuthServiceConfig = {
@@ -53,6 +54,7 @@ const socialConfig: SocialAuthServiceConfig = {
     HasRolesDirective,
     FileInputComponent,
     CenteredCardComponent,
+    CocktailFormComponent,
   ],
   imports: [
     BrowserModule,
